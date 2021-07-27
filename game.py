@@ -1,0 +1,65 @@
+import pygame as pg
+
+from config.constants import *
+
+
+class Camera:
+    def __init__(self):
+        self.rect = pg.Rect(0, 0, WIN_X, WIN_Y)
+        # положение камеры относительно всего большого уровня (может влиять на рисунок фона)
+
+    def move(self, offset_x, offset_y, group):
+        """смещение камеры относительно уровня"""
+        self.rect.move_ip(-1 * offset_x, -1 * offset_y)
+        for s in group:
+            s.rect.move_ip(offset_x, offset_y)
+            s.area.move_ip(offset_x, offset_y)
+
+    def back_shift(self):
+        """возвращает число от 0 до WIN_X, на которое по оси X надо сдвинуть фон"""
+        # return self.rect.x % WIN_X
+        # попробуем сдвигать фон в 2 раза медленнее, чем движется камера.
+        # тогда должна возникнуть глубина:
+        return (self.rect.x // 2) % WIN_X
+
+
+class Game:
+    def __init__(self):
+        self.run = True
+        # список всех персонажей игры:
+        self.all_sprites = pg.sprite.Group()
+        # список опор (платформ):
+        self.barriers = pg.sprite.Group()
+        # список врагов:
+        self.enemies = pg.sprite.Group()
+        # список снарядов героя (убивают врагов):
+        self.fires = pg.sprite.Group()
+        # список целей (переключают на следующий уровень):
+        self.goals = pg.sprite.Group()
+        # в игре одна камера, из которой смотрим:
+        self.camera = Camera()
+        self.hero_pos = pg.Rect(0, 0, 0, 0)  # здесь запоминаем место героя на предыдущем цикле
+        # список уровней игры:
+        self.levels = []  # этот список заполнится при загрузке уровней (level_config)
+        self.current_level = -1
+        # список используемых костюмов:
+        self.costumes = []
+        # переменные для числа очков и жизней:
+        self.lives = HERO_START_LIVES
+        self.points = 0
+
+    def start(self):
+        pg.init()
+        self.timer = pg.time.Clock()
+        pg.display.set_caption(TITLE)
+        self.window = pg.display.set_mode([WIN_X, WIN_Y])
+        # self.costumes = file_images()
+        # self.help = Help()
+        self.is_help = False
+        self.is_finished = False
+        # self.music = Music()
+        self.back_image = pg.Surface([WIN_X, WIN_Y])
+        self.back_image.fill(C_GREEN)  # по умолчанию фон - зелёный прямоугольник
+
+    def stop(self):
+        self.run = False
