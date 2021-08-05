@@ -63,3 +63,14 @@ class Game:
 
     def stop(self):
         self.run = False
+
+    def start_level(self, level_n):
+        self.current_level = level_n
+        hero_of_the_level = self.levels[level_n].load()
+        self.all_sprites.add(hero_of_the_level)
+        self.hero_pos = hero_of_the_level.rect.copy()  # copy() нужна для копирования сложных объектов
+
+        return hero_of_the_level  # возвращает спрайт героя
+
+
+
