@@ -8,8 +8,8 @@ from game import *
 game = Game()
 
 game.start()
-
-hero = game.start_level(0)
+create_levels(game)
+# hero = game.start_level(0)
 
 while game.run:
     # Ввод данных (обработка событий)
@@ -17,6 +17,9 @@ while game.run:
         # событие нажатия на крестик окошка
         if event.type == pg.QUIT:
             game.stop()  # цикл перестанет повторяться, программа завершится
+
+    # Вывод данных (отрисовка)
+    game.draw_back_with_shift()
 
     pg.display.update()
     # Пауза

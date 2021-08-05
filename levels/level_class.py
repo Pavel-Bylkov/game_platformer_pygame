@@ -1,4 +1,5 @@
 import pygame as pg
+from config.constants import *
 
 
 def get_platform(x, y, w, h, length, x_speed, y_speed):
@@ -71,7 +72,7 @@ class Level:
         img = game.costumes[gr_hero]
         x = self.hero_x
         y = self.hero_y
-        area = pg.Rect(self.min_x, - WIN_X, self.max_x, 2 * WIN_Y)
+        area = pg.Rect(self.min_x, -WIN_Y, self.max_x, 2 * WIN_Y)
         return Hero(img, x, y, area)
 
     def load(self, game):
