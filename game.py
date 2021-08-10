@@ -72,21 +72,22 @@ class Game:
 
         return hero_of_the_level  # возвращает спрайт героя
 
-    def set_back(self, filename):
-        if len(filename) > 0: # если в уровне не прописан фон, то соотв. свойство - пустая строка
-            self.back_image = pg.transform.scale(pg.image.load(filename).convert(),
-                                                 [WIN_X, WIN_Y])
+    def set_back(self, filename=""):
+        if len(filename) > 0:  # если в уровне не прописан фон, то соотв. свойство - пустая строка
+            self.back_image = pg.transform.scale(
+                pg.image.load(filename).convert(), [WIN_X, WIN_Y])
         else:
             self.back_image = pg.Surface([WIN_X, WIN_Y])
-            self.back_image.fill(C_GREEN) # по умолчанию фон - зелёный прямоугольник
+            self.back_image.fill(C_GREEN)  # по умолчанию фон - зелёный прямоугольник
 
     def draw_back(self, x=0, y=0):
-        ''' заливает окно фоновым изображением'''
+        """заливает окно фоновым изображением"""
         self.window.blit(self.back_image, (x, y))
 
     def draw_back_with_shift(self):
         local_shift = self.camera.back_shift()
         self.draw_back(local_shift)
         if local_shift != 0:
-            self.draw_back(local_shift - WIN_X + 1) # сдвиг на 1 пиксел позволяет некоторые картинки "склеить" лучше
+            # сдвиг на 1 пиксел позволяет некоторые картинки "склеить" лучше
+            self.draw_back(local_shift - WIN_X + 1)
 
