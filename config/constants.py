@@ -20,3 +20,16 @@ C_GREEN = (32, 128, 32)
 
 
 DIR_IMG = 'img' + os.sep   # separate - разделитель в Windows \, а в Linux(Mac os) - /
+
+# индексы для списка картинок
+GR_HERO = 0
+GR_ENEMY = 1
+GR_PLAT_L = 2
+GR_PLAT_M = 3
+GR_PLAT_R = 4
+GR_FIRE = 5
+GR_E_FIRE = 6
+GR_ENEMY2 = 7
+GR_GOAL = 8
+# общее число картинок
+GR_TOTAL = 9
