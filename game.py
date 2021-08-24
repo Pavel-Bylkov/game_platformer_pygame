@@ -1,6 +1,7 @@
 import pygame as pg
 
 from config.constants import *
+from sprites.game_sprites_classes import COSTUMES, WINDOW
 
 
 class Camera:
@@ -49,11 +50,10 @@ class Game:
         self.points = 0
 
     def start(self):
-        pg.init()
         self.timer = pg.time.Clock()
         pg.display.set_caption(TITLE)
-        self.window = pg.display.set_mode([WIN_X, WIN_Y])
-        # self.costumes = file_images()
+        self.window = WINDOW
+        self.costumes = COSTUMES
         # self.help = Help()
         self.is_help = False
         self.is_finished = False
@@ -90,4 +90,8 @@ class Game:
         if local_shift != 0:
             # сдвиг на 1 пиксел позволяет некоторые картинки "склеить" лучше
             self.draw_back(local_shift - WIN_X + 1)
+
+    def add_barrier(self, platform):
+        self.barriers.add(platform)
+        self.all_sprites.add(platform)
 

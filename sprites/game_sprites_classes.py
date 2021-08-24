@@ -1,6 +1,9 @@
 import pygame as pg
 
 from sprites.base_class import BaseSprite, Character
+from config.graphics_config import COSTUMES, WINDOW
+from config.take_images import append_img3
+from config.constants import *
 
 
 class Platform(BaseSprite):
@@ -9,9 +12,9 @@ class Platform(BaseSprite):
     """
     def __init__(self, length, x, y, area, x_speed=0, y_speed=0):
         """получает длину платформы, генерирует нужной длины картинку"""
-        img_l = game.costumes[gr_plat_l]
-        img_m = game.costumes[gr_plat_m]
-        img_r = game.costumes[gr_plat_r]
+        img_l = COSTUMES[GR_PLAT_L]
+        img_m = COSTUMES[GR_PLAT_M]
+        img_r = COSTUMES[GR_PLAT_R]
         image = append_img3(img_l, img_m, img_r, length)
 
         # создаем BaseSprite с нужным

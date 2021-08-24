@@ -1,5 +1,6 @@
 import pygame as pg
 from config.constants import *
+from sprites.game_sprites_classes import Platform
 
 
 def get_platform(x, y, w, h, length, x_speed, y_speed):

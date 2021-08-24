@@ -18,8 +18,11 @@ while game.run:
         if event.type == pg.QUIT:
             game.stop()  # цикл перестанет повторяться, программа завершится
 
+    game.all_sprites.update(game)  # перемещение игровых объектов,
     # Вывод данных (отрисовка)
     game.draw_back_with_shift()
+    game.all_sprites.draw(game.window)
+
 
     pg.display.update()
     # Пауза
